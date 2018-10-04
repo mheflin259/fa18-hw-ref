@@ -130,7 +130,14 @@ Example:
 		1961
 """
 def alive_people(data):
-	pass
+    year_count = {}
+    for lifespan in data:
+        for year in range(lifespan[0], lifespan[0] + lifespan[1] + 1):
+            if year not in year_count:
+                year_count[year] = 1
+            else:
+                year_count[year] += 1
+    return max(year_count, key = lambda k: year_count[k])
 
 
 """
@@ -207,4 +214,12 @@ Example 2:
 		[1, 2]
 """
 def zero_sum_subarray(arr):
-    pass
+    for i in range(len(arr)):
+        if arr[i] == 0:
+            return [i, 1]
+        sub_array = [arr[i]]
+        for j in range(i + 1, len(arr)):
+            sub_array.append(arr[j])
+            if sum(sub_array) == 0:
+                return [i, j - i]
+    return None
