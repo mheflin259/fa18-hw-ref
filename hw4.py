@@ -13,7 +13,13 @@ most_common_char
 Given an input string s, return the most common character in s.
 """
 def most_common_char(s):
-	pass
+    count = {}
+    for letter in s:
+        if letter not in count:
+            count[letter] = 1
+        else:
+            count[letter] += 1
+    return max(count, key = lambda k: count[k])
 
 
 """
@@ -37,7 +43,14 @@ Example 2:
 		None
 """
 def alphabet_finder(s):
-	pass
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    if len(s) < len(alphabet):
+        return None
+    for i in range(len(s) - 1):
+        alphabet = alphabet.replace((s[i:i + 1]).lower(), "")
+        if alphabet == "":
+            return s[:i + 1]
+    return None
 
 
 """
@@ -194,6 +207,4 @@ Example 2:
 		[1, 2]
 """
 def zero_sum_subarray(arr):
-    pass 
-
-
+    pass
