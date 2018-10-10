@@ -15,10 +15,7 @@ Given an input string s, return the most common character in s.
 def most_common_char(s):
     count = {}
     for letter in s:
-        if letter not in count:
-            count[letter] = 1
-        else:
-            count[letter] += 1
+        count[letter] = s.count(letter)
     return max(count, key = lambda k: count[k])
 
 
@@ -69,7 +66,23 @@ Example:
 		[1, 6]
 """
 def longest_unique_subarray(arr):
-	pass
+    max_len = 0
+    return_a = 0
+    return_b = 0
+    for a in range(len(arr), -1, -1):
+        for b in range(len(arr), a - 1, -1):
+            sub_array = arr[a:a+b]
+            unique_values = []
+            is_unique = True
+            for number in sub_array:
+                if number in unique_values:
+                    is_unique = False
+                    break
+                unique_values.append(number)
+            if is_unique and len(unique_values) > max_len:
+                max_len = len(unique_values)
+                return_a = a
+    return [return_a,max_len]
 
 
 """
@@ -112,8 +125,7 @@ Example 3:
 		False
 """
 def string_my_one_true_love(s):
-	pass
-
+    pass
 
 """
 alive_people
@@ -160,8 +172,18 @@ Example:
 		]
 """
 def three_sum(arr, t):
-	pass
-
+    result = []
+    for i in range(len(arr) - 2):
+        for j in range(i+1, len(arr) - 1):
+            for k in range(j+1, len(arr)):
+                if arr[i] + arr[j] + arr[k] == t:
+                    new_triplet = [arr[i], arr[j], arr[k]]
+                    result.append(new_triplet)
+    for i in range(len(result) - 1):
+        for j in range(i+1, len(result)):
+            if set(result[i]) == set(result[j]):
+                result.remove(result[j])
+    return result
 
 """
 happy_numbers
@@ -182,8 +204,7 @@ Example 2:
 		4294967296 ** (1 / 16) (i.e., 4)
 """
 def happy_numbers(n):
-	pass
-
+    pass
 
 """
 zero_sum_subarray
